@@ -3,10 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
+
+
+
 public class PlayerController : NetworkBehaviour
 {
     #region Variables
     private float Health;
+    private GameObject[] clients;
+
+    public List<Vector3> spawnLocations;
     #endregion
 
     #region Properties
@@ -15,9 +21,10 @@ public class PlayerController : NetworkBehaviour
 
     #region Events
     void Awake()
-    {
-        transform.position = new Vector3(-8.5f,1f,0);
+    { 
+        clients = GameObject.FindGameObjectsWithTag("Player");
         Health = 50f;
+        SpawnPlayer();
     }
 
     // Update is called once per frame
@@ -62,6 +69,17 @@ public class PlayerController : NetworkBehaviour
                 Quaternion.identity
             );
         NetworkServer.Spawn(g);
+    }
+
+    private void SpawnPlayer()
+    {
+        spawnLocations = new List<Vector3>
+        (
+            new Vector3[] { new Vector3(-8.5f, 1f, 0), new Vector3(8.5f, 1f, 0) }
+        );
+        if (clients.Length > 1)
+            transform.position = spawnLocations[1];
+        else transform.position = spawnLocations[0];
     }
     #endregion
 

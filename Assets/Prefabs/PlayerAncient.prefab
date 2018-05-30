@@ -27,7 +27,7 @@ GameObject:
   - component: {fileID: 114242918812393292}
   m_Layer: 0
   m_Name: PlayerAncient
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -110,11 +110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 000551d930df14941ac8999029f3c8f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Buildings:
-  - {fileID: 1226910513142574, guid: 99b0962a5b02d184995f52301a9cc0b2, type: 2}
-  - {fileID: 1268302582974526, guid: cfd1c73141f192445a3f406e7237c18b, type: 2}
-  - {fileID: 1590913602798300, guid: 0056a48fd6d660f4599dbd33038e6500, type: 2}
-  - {fileID: 1704097491686296, guid: cc52cb24d7962b54285f3332d2357518, type: 2}
+  spawnLocations: []
 --- !u!114 &114400162224398590
 MonoBehaviour:
   m_ObjectHideFlags: 1
