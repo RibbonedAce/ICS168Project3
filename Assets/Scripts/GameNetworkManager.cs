@@ -5,8 +5,8 @@ using UnityEngine.Networking;
 
 public class GameNetworkManager : NetworkManager 
 {
-	#region Variables
-	
+    #region Variables
+
 	#endregion
 	
 	#region Properties
@@ -23,7 +23,7 @@ public class GameNetworkManager : NetworkManager
 	}
 
     /// <summary>
-    ///  Use this for initialization
+    /// Use this for initialization
     /// </summary>
     private void Start() 
 	{
@@ -89,22 +89,6 @@ public class GameNetworkManager : NetworkManager
     public void CreateMatch()
     {
         matchMaker.CreateMatch(matchName, matchSize, true, "", "", "", 0, 0, OnMatchCreate);
-    }
-
-    /// <summary>
-    /// List all of the matches available
-    /// </summary>
-    public void ListMatches()
-    {
-        matchMaker.ListMatches(0, 20, "", false, 0, 0, OnMatchList);
-    }
-
-    /// <summary>
-    /// Set the matches to null
-    /// </summary>
-    public void SetMatchesNull()
-    {
-        matches = null;
     }
     #endregion
 

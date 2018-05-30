@@ -9,48 +9,47 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1504770179665420}
+  m_RootGameObject: {fileID: 1590913602798300}
   m_IsPrefabParent: 1
---- !u!1 &1504770179665420
+--- !u!1 &1590913602798300
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4035883403794664}
-  - component: {fileID: 33791362384055516}
-  - component: {fileID: 23061718089289540}
-  - component: {fileID: 65186051616597918}
-  - component: {fileID: 114650223673585816}
-  - component: {fileID: 114400162224398590}
-  - component: {fileID: 114242918812393292}
+  - component: {fileID: 4168854858181844}
+  - component: {fileID: 33742011662270776}
+  - component: {fileID: 23545863970165936}
+  - component: {fileID: 65938789594373994}
+  - component: {fileID: 114054432334449510}
+  - component: {fileID: 114583419216046580}
   m_Layer: 0
-  m_Name: PlayerAncient
+  m_Name: Rare
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4035883403794664
+--- !u!4 &4168854858181844
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1504770179665420}
+  m_GameObject: {fileID: 1590913602798300}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -9, y: 1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.112000085, y: -3, z: 0}
+  m_LocalScale: {x: 0.2, y: 1, z: 0.125}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &23061718089289540
+--- !u!23 &23545863970165936
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1504770179665420}
+  m_GameObject: {fileID: 1590913602798300}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -60,7 +59,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 53375ef69e5969142a9b913031445c45, type: 2}
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -80,68 +79,31 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!33 &33791362384055516
+--- !u!33 &33742011662270776
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1504770179665420}
+  m_GameObject: {fileID: 1590913602798300}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!65 &65186051616597918
+--- !u!65 &65938789594373994
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1504770179665420}
+  m_GameObject: {fileID: 1590913602798300}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114242918812393292
+--- !u!114 &114054432334449510
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1504770179665420}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 000551d930df14941ac8999029f3c8f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Buildings:
-  - {fileID: 1226910513142574, guid: 99b0962a5b02d184995f52301a9cc0b2, type: 2}
-  - {fileID: 1268302582974526, guid: cfd1c73141f192445a3f406e7237c18b, type: 2}
-  - {fileID: 1590913602798300, guid: 0056a48fd6d660f4599dbd33038e6500, type: 2}
-  - {fileID: 1704097491686296, guid: cc52cb24d7962b54285f3332d2357518, type: 2}
---- !u!114 &114400162224398590
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1504770179665420}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_TransformSyncMode: 1
-  m_SendInterval: 0.1
-  m_SyncRotationAxis: 7
-  m_RotationSyncCompression: 0
-  m_SyncSpin: 0
-  m_MovementTheshold: 0.001
-  m_VelocityThreshold: 0.0001
-  m_SnapThreshold: 5
-  m_InterpolateRotation: 1
-  m_InterpolateMovement: 1
---- !u!114 &114650223673585816
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1504770179665420}
+  m_GameObject: {fileID: 1590913602798300}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
@@ -150,21 +112,42 @@ MonoBehaviour:
   m_SceneId:
     m_Value: 0
   m_AssetId:
-    i0: 131
-    i1: 181
-    i2: 193
-    i3: 74
-    i4: 167
-    i5: 244
-    i6: 118
-    i7: 36
-    i8: 233
-    i9: 234
-    i10: 6
-    i11: 155
-    i12: 222
-    i13: 41
-    i14: 81
-    i15: 189
+    i0: 0
+    i1: 86
+    i2: 164
+    i3: 143
+    i4: 214
+    i5: 214
+    i6: 96
+    i7: 244
+    i8: 89
+    i9: 157
+    i10: 189
+    i11: 51
+    i12: 3
+    i13: 142
+    i14: 101
+    i15: 0
   m_ServerOnly: 0
-  m_LocalPlayerAuthority: 1
+  m_LocalPlayerAuthority: 0
+--- !u!114 &114583419216046580
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1590913602798300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 1
+  m_SendInterval: 1
+  m_SyncRotationAxis: 7
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_VelocityThreshold: 0.0001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1

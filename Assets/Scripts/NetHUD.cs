@@ -37,12 +37,12 @@ public class NetHUD : MonoBehaviour
     private bool m_ShowServer;
 
     /// <summary>
-    /// The match buttons instantiated
+    /// <para>The match buttons instantiated</para>
     /// </summary>
     private List<GameObject> matchButtons;
 
     /// <summary>
-    /// The match info snapshot to keep track of.
+    /// <para>The match info snapshot to keep track of</para>
     /// </summary>
     private UnityEngine.Networking.Match.MatchInfoSnapshot currentMatch;
 	#endregion
@@ -75,11 +75,6 @@ public class NetHUD : MonoBehaviour
     private void Update() 
 	{
         List<int> actives = new List<int>();
-
-        foreach (GameObject mb in matchButtons)
-        {
-            Destroy(mb);
-        }
 
         bool flag = manager.client == null || manager.client.connection == null || manager.client.connection.connectionId == -1;
         if (!manager.IsClientConnected() && !NetworkServer.active && manager.matchMaker == null)
@@ -136,11 +131,6 @@ public class NetHUD : MonoBehaviour
                     else
                     {
                         actives.Add(8);
-                        foreach (UnityEngine.Networking.Match.MatchInfoSnapshot m in manager.matches)
-                        {
-                            currentMatch = m;
-                            MakeMatchButton();
-                        }
                     }
                 }
                 actives.Add(9);
@@ -210,6 +200,31 @@ public class NetHUD : MonoBehaviour
             case 2:
                 manager.SetMatchHost("staging-mm.unet.unity3d.com", 443, true);
                 return;
+        }
+    }
+
+    /// <summary>
+    /// List and show all of the amtches
+    /// </summary>
+    public void ShowMatches()
+    {
+        manager.matchMaker.ListMatches(0, 20, "", false, 0, 0, manager.OnMatchList);
+        foreach (UnityEngine.Networking.Match.MatchInfoSnapshot m in manager.matches)
+        {
+            currentMatch = m;
+            MakeMatchButton();
+        }
+    }
+
+    /// <summary>
+    /// Set the matches to null and delete buttons
+    /// </summary>
+    public void SetMatchesNull()
+    {
+        manager.matches = null;
+        foreach (GameObject mb in matchButtons)
+        {
+            Destroy(mb);
         }
     }
     #endregion
