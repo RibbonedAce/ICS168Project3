@@ -54,7 +54,13 @@ public class PlayerController : NetworkBehaviour
     #region Methods
     private void Build(Ray ray, RaycastHit hit)
     {
-        GameObject g = Instantiate(GameController.Instance.buildings[Random.Range(0, GameController.Instance.buildings.Length)], hit.point.MoveToAxisPosition(Axis.Y, 1, ray.direction), Quaternion.identity);
+        GameObject g = Instantiate
+            (
+                //GameController.Instance.buildings[Random.Range(0, GameController.Instance.buildings.Length)],
+                GameController.Instance.buildings[0],
+                hit.point.MoveToAxisPosition(Axis.Y, 1, ray.direction), 
+                Quaternion.identity
+            );
         NetworkServer.Spawn(g);
     }
     #endregion
