@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - destination
+  - minion
+  - building
   layers:
   - Default
   - TransparentFX

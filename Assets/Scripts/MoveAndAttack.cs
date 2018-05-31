@@ -6,13 +6,30 @@ using UnityEngine.Networking;
 public class MoveAndAttack : NetworkBehaviour {
 
     // Use this for initialization
-    private GameObject destination;
+    //private GameObject destination;
+    private Vector3 destinationPos;
     private Rigidbody _rigidbody;
     private NavMeshAgent _navMesh;
-    private bool isSetDest;
+    public bool isSetDest;
+    public int team;
 	void Awake () {
         _rigidbody = GetComponent<Rigidbody>();
-        destination = GameObject.FindGameObjectWithTag("destination");
+        //destination = GameObject.FindGameObjectWithTag("destination");
+        //team decider
+        if (transform.position.x <= 0)
+        {
+            destinationPos = new Vector3(9.5f, 1, 0);
+            team = 0;
+            gameObject.GetComponent<Renderer>().material.color = Color.blue;
+        }
+        else
+        {
+            destinationPos = new Vector3(-9.5f, 1, 0);
+            team = 1;
+            gameObject.GetComponent<Renderer>().material.color = Color.red;
+        }
+            
+
         _navMesh = GetComponent<NavMeshAgent>();
         isSetDest = false;
         if (_navMesh == null)
@@ -23,13 +40,17 @@ public class MoveAndAttack : NetworkBehaviour {
 	void Update () {
         if (_navMesh != null && !isSetDest)
             SetDestination();
+        else
+            _navMesh.isStopped = true;
 	}
 
     private void SetDestination()
     {
         isSetDest = true;
-        if(destination != null)
-            _navMesh.SetDestination(destination.transform.position);
+        _navMesh.isStopped = false;
+        //if(destination != null)
+        //    _navMesh.SetDestination(destination.transform.position);
+        _navMesh.SetDestination(destinationPos);
     }
 
     private void OnCollisionEnter(Collision collision)
