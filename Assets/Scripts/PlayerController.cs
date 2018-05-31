@@ -101,7 +101,7 @@ public class PlayerController : NetworkBehaviour
     {
         spawnLocations = new List<Vector3>
         (
-            new Vector3[] { new Vector3(-8.5f, 1f, 0), new Vector3(8.5f, 1f, 0) }
+            new Vector3[] { new Vector3(-8.5f, 3f, 0), new Vector3(8.5f, 3f, 0) }
         );
         if (clients.Length > 1)
             transform.position = spawnLocations[1];
