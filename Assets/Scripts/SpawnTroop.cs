@@ -11,7 +11,7 @@ public class SpawnTroop : MonoBehaviour {
     public GameObject troop;
 
 	void Awake () {
-        Debug.Log("Built");
+        Debug.Log("Building Type: " + gameObject.name);
         spawnLocation = transform.position - new Vector3(0,0,1);
         spawnRate = 5.0f;
         StartCoroutine("Spawn");
@@ -26,7 +26,6 @@ public class SpawnTroop : MonoBehaviour {
     {
         while (true)
         {
-            Debug.Log("spawn");
             yield return new WaitForSeconds(spawnRate);
             Instantiate(troop, spawnLocation, Quaternion.identity);
         }

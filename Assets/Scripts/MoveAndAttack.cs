@@ -9,25 +9,25 @@ public class MoveAndAttack : NetworkBehaviour {
     private GameObject destination;
     private Rigidbody _rigidbody;
     private NavMeshAgent _navMesh;
-    private bool IsDestSet;
+    private bool isSetDest;
 	void Awake () {
         _rigidbody = GetComponent<Rigidbody>();
         destination = GameObject.FindGameObjectWithTag("destination");
         _navMesh = GetComponent<NavMeshAgent>();
-        IsDestSet = false;
+        isSetDest = false;
         if (_navMesh == null)
             Debug.Log("Error, NavMeshAgent component doesn't exist on " + gameObject.name);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        if (_navMesh != null && !IsDestSet)
+        if (_navMesh != null && !isSetDest)
             SetDestination();
 	}
 
     private void SetDestination()
     {
-        IsDestSet = true;
+        isSetDest = true;
         if(destination != null)
             _navMesh.SetDestination(destination.transform.position);
     }
@@ -36,7 +36,6 @@ public class MoveAndAttack : NetworkBehaviour {
     {
         if (collision.transform.tag == "destination")
         {
-            IsDestSet = false;
             Destroy(gameObject);
         }
     }

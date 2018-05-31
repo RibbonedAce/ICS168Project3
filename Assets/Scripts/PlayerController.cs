@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-
-
-
 public class PlayerController : NetworkBehaviour
 {
     #region Variables
@@ -61,14 +58,43 @@ public class PlayerController : NetworkBehaviour
     #region Methods
     private void Build(Ray ray, RaycastHit hit)
     {
-        GameObject g = Instantiate
-            (
-                //GameController.Instance.buildings[Random.Range(0, GameController.Instance.buildings.Length)],
-                GameController.Instance.buildings[0],
-                hit.point.MoveToAxisPosition(Axis.Y, 1, ray.direction), 
-                Quaternion.identity
-            );
-        NetworkServer.Spawn(g);
+        /*GameObject g = Instantiate
+          (
+               GameController.Instance.buildings[Random.Range(0, GameController.Instance.buildings.Length)],
+               GameController.Instance.buildings[0],
+               hit.point.MoveToAxisPosition(Axis.Y, 1, ray.direction), 
+               Quaternion.identity
+          );*/
+        //NetworkServer.Spawn(g);
+        CmdSendBuildingInfo(GameController.Instance.buildings[0].name, hit.point.MoveToAxisPosition(Axis.Y, 1, ray.direction), Quaternion.identity);
+    }
+
+    [Command]
+    void CmdSendBuildingInfo(string name,Vector3 pos,Quaternion rot)
+    {
+        RpcUpdateBuildingInfo(name,pos,rot);
+    }
+    [ClientRpc]
+    void RpcUpdateBuildingInfo(string name,Vector3 pos,Quaternion rot)
+    {
+        GameObject r;
+        switch (name)
+        {
+            case "Common":
+                r = Instantiate(GameController.Instance.buildings[0], pos, rot);
+                break;
+            case "Uncommon":
+                r = Instantiate(GameController.Instance.buildings[1], pos, rot);
+                break;
+            case "Rare":
+                r = Instantiate(GameController.Instance.buildings[2], pos, rot);
+                break;
+            case "Mythic":
+                r = Instantiate(GameController.Instance.buildings[3], pos, rot);
+                break;
+            default:
+                break;
+        }
     }
 
     private void SpawnPlayer()
