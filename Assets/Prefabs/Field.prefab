@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4778950334638016}
   - component: {fileID: 108891531273279290}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Directional Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 33440663598262052}
   - component: {fileID: 23667497267142288}
   - component: {fileID: 65445174322801740}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: LeftSide
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: 33192223177457220}
   - component: {fileID: 23415014736038914}
   - component: {fileID: 65832705756422562}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bridge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ GameObject:
   - component: {fileID: 33067514107308314}
   - component: {fileID: 23918438356050928}
   - component: {fileID: 65099611762809578}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: RightSide
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,7 +89,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4304832797301698}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Field
   m_TagString: Untagged
   m_Icon: {fileID: 0}
