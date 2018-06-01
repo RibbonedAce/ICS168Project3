@@ -20,7 +20,7 @@ public static class Utils
     /// <param name="axis">The axis to set</param>
     /// <param name="value">The value to set the axis at</param>
     /// <param name="direction">The vector direction to move along</param>
-    /// <returns></returns>
+    /// <returns>Returns the modified vector</returns>
 	public static Vector3 MoveToAxisPosition(this Vector3 v, Axis axis, float value, Vector3 direction)
     {
         float m;
@@ -52,17 +52,17 @@ public static class Utils
     }
 
     /// <summary>
-    /// Replace listeners with new actions on a button
+    /// Set the anchors of a rect transform
     /// </summary>
-    /// <param name="b">The button to use</param>
-    /// <param name="actions">The actions to replace with</param>
-    public static void ReplaceListeners(this Button b, UnityEngine.Events.UnityAction[] actions)
+    /// <param name="t">The rect transform to use</param>
+    /// <param name="min">The minimum of x and y</param>
+    /// <param name="max">The maximum of x and y</param>
+    public static void SetAnchors(this RectTransform t, Vector2 min, Vector2 max)
     {
-        b.onClick.RemoveAllListeners();
-        foreach (UnityEngine.Events.UnityAction a in actions)
-        {
-            b.onClick.AddListener(a);
-        }
+        t.anchorMin = min;
+        t.anchorMax = max;
+        t.anchoredPosition = Vector2.zero;
+        t.sizeDelta = Vector2.zero;
     }
 	#endregion
 	

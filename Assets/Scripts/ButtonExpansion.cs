@@ -8,40 +8,57 @@ public class ButtonExpansion : MonoBehaviour
 {
     #region Variables
     /// <summary>
-    /// <para>Whether the button is currently changing size</para>
-    /// </summary>
-    public bool changing;
-
-    /// <summary>
-    /// <para>Whether the compact button is active</para>
-    /// </summary>
-    public bool compactActive;
-
-    /// <summary>
     /// <para>The button to replace when it is compacted</para>
     /// </summary>
     [SerializeField]
     private Button compactButton;
 
     /// <summary>
-    /// <para>The animator component attached</para>
+    /// <para>The minimum anchor when the button is contracted</para>
     /// </summary>
-    private Animator _animator;
-	#endregion
-	
-	#region Properties
-	
-	#endregion
-	
-	#region Events
+    [SerializeField]
+    private Vector2 contractMinAnchor;
+
+    /// <summary>
+    /// <para>The maximum anchor when the button is contracted</para>
+    /// </summary>
+    [SerializeField]
+    private Vector2 contractMaxAnchor;
+
+    /// <summary>
+    /// <para>The minimum anchor when the button is expanded</para>
+    /// </summary>
+    [SerializeField]
+    private Vector2 expandMinAnchor;
+
+    /// <summary>
+    /// <para>The maximum anchor when the button is expanded</para>
+    /// </summary>
+    [SerializeField]
+    private Vector2 expandMaxAnchor;
+
+    /// <summary>
+    /// <para>The current routine for changing button size</para>
+    /// </summary>
+    private Coroutine changeRoutine;
+
+    /// <summary>
+    /// <para>The rect transform component attached</para>
+    /// </summary>
+    private RectTransform _rectTransform;
+    #endregion
+
+    #region Properties
+
+    #endregion
+
+    #region Events
     /// <summary>
     /// Awake is called before Start
     /// </summary>
-	private void Awake() 
+    private void Awake() 
 	{
-        _animator = GetComponent<Animator>();
-        _animator.SetBool("changing", changing);
-        _animator.SetBool("expanded", false);
+        _rectTransform = GetComponent<RectTransform>();
     }
 
     /// <summary>
@@ -57,33 +74,73 @@ public class ButtonExpansion : MonoBehaviour
     /// </summary>
     private void Update() 
 	{
-        _animator.SetBool("changing", changing);
-        compactButton.gameObject.SetActive(compactActive);
+
     }
-	#endregion
-	
-	#region Methods
+    #endregion
+
+    #region Methods
     /// <summary>
-    /// Contract the button back
+    /// Start contraction of the button
     /// </summary>
-	public void StartContraction()
+    public void StartContraction()
     {
-        _animator.SetBool("expanded", false);
-        changing = true;
+        if (changeRoutine != null)
+        {
+            StopCoroutine(changeRoutine);
+        }
+        changeRoutine = StartCoroutine(Contract(1f));
+    }
+
+    /// <summary>
+    /// Start expansion of the button
+    /// </summary>
+    public void StartExpansion()
+    {
+        if (changeRoutine != null)
+        {
+            StopCoroutine(changeRoutine);
+        }
+        changeRoutine = StartCoroutine(Expand(1f));
+    }
+    #endregion
+
+    #region Coroutines
+    /// <summary>
+    /// Contract the button in
+    /// </summary>
+    /// <param name="time">How long the contraction takes</param>
+    /// <returns>Returns the time to expand at every frame</returns>
+    private IEnumerator Contract(float time)
+    {
+        Vector2 oldMin = _rectTransform.anchorMin;
+        Vector2 oldMax = _rectTransform.anchorMax;
+        for (float t = 0f; t < time; t += Time.deltaTime)
+        {
+            _rectTransform.SetAnchors(Vector2.Lerp(oldMin, contractMinAnchor, t / time), Vector2.Lerp(oldMax, contractMaxAnchor, t / time));
+            yield return null;
+        }
+        _rectTransform.SetAnchors(contractMinAnchor, contractMaxAnchor);
+        compactButton.gameObject.SetActive(true);
     }
 
     /// <summary>
     /// Expand the button out
     /// </summary>
-    public void StartExpansion()
+    /// <param name="time">How long the expansion takes</param>
+    /// <returns>Returns the time to contract at every frame and delay to contract again</returns>
+    private IEnumerator Expand(float time)
     {
-        _animator.SetBool("expanded", true);
-        changing = true;
-        Invoke("StartContraction", 3f);
+        compactButton.gameObject.SetActive(false);
+        Vector2 oldMin = _rectTransform.anchorMin;
+        Vector2 oldMax = _rectTransform.anchorMax;
+        for (float t = 0f; t < time; t += Time.deltaTime)
+        {
+            _rectTransform.SetAnchors(Vector2.Lerp(oldMin, expandMinAnchor, t / time), Vector2.Lerp(oldMax, expandMaxAnchor, t / time));
+            yield return null;
+        }
+        _rectTransform.SetAnchors(expandMinAnchor, expandMaxAnchor);
+        yield return new WaitForSeconds(time * 3);
+        StartContraction();
     }
-	#endregion
-	
-	#region Coroutines
-	
-	#endregion
+    #endregion
 }
