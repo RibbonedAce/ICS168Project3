@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum Axis
 {
@@ -15,10 +16,10 @@ public static class Utils
     /// <summary>
     /// Move a vector to a certain axis within a certain direction vector
     /// </summary>
-    /// <param name="v">The vector to move</param>
+    /// <param name="v">The vector3 to use</param>
+    /// <param name="axis">The axis to set</param>
     /// <param name="value">The value to set the axis at</param>
-    /// <param name="axis">The axis to set to a certain value</param>
-    /// <param name="direction">The vector in which the value can move when setting</param>
+    /// <param name="direction">The vector direction to move along</param>
     /// <returns></returns>
 	public static Vector3 MoveToAxisPosition(this Vector3 v, Axis axis, float value, Vector3 direction)
     {
@@ -48,6 +49,20 @@ public static class Utils
                 return v + m * direction;
         }
         return Vector3.zero;
+    }
+
+    /// <summary>
+    /// Replace listeners with new actions on a button
+    /// </summary>
+    /// <param name="b">The button to use</param>
+    /// <param name="actions">The actions to replace with</param>
+    public static void ReplaceListeners(this Button b, UnityEngine.Events.UnityAction[] actions)
+    {
+        b.onClick.RemoveAllListeners();
+        foreach (UnityEngine.Events.UnityAction a in actions)
+        {
+            b.onClick.AddListener(a);
+        }
     }
 	#endregion
 	

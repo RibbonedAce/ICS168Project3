@@ -209,10 +209,13 @@ public class NetHUD : MonoBehaviour
     public void ShowMatches()
     {
         manager.matchMaker.ListMatches(0, 20, "", false, 0, 0, manager.OnMatchList);
-        foreach (UnityEngine.Networking.Match.MatchInfoSnapshot m in manager.matches)
+        if (manager.matches != null)
         {
-            currentMatch = m;
-            MakeMatchButton();
+            foreach (UnityEngine.Networking.Match.MatchInfoSnapshot m in manager.matches)
+            {
+                currentMatch = m;
+                MakeMatchButton();
+            }
         }
     }
 
