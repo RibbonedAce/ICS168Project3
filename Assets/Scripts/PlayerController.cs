@@ -9,6 +9,8 @@ public class PlayerController : NetworkBehaviour
     private float Health;
     private GameObject[] clients;
     private List<Vector3> built;
+    [SerializeField]
+    private int pID = -1;
 
     public List<Vector3> spawnLocations;
     public Grid grid;
@@ -43,7 +45,8 @@ public class PlayerController : NetworkBehaviour
                 RaycastHit hit;
                 if (Physics.Raycast(ray, out hit))
                 {
-                    Build(ray, hit);
+                    if((hit.transform.name == "LeftField" && pID == 0) || ((hit.transform.name == "RightField" && pID == 1)))
+                        Build(ray, hit);
                 }
             }
         }
@@ -52,8 +55,9 @@ public class PlayerController : NetworkBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
-            {
-                Build(ray, hit);
+            { 
+                if((hit.transform.name == "LeftField" && pID == 0) || ((hit.transform.name == "RightField" && pID == 1)))
+                    Build(ray, hit);
             }
         }
 	}
@@ -63,6 +67,7 @@ public class PlayerController : NetworkBehaviour
     private void Build(Ray ray, RaycastHit hit)
     {
         Vector3 pos = grid.GetNearestPointOnGrid(hit.point);
+        Debug.Log(pos);
         pos.y = 1f;
         if(built.Contains(pos))
             return;
@@ -107,8 +112,15 @@ public class PlayerController : NetworkBehaviour
             new Vector3[] { new Vector3(-8.5f, 3f, 0), new Vector3(8.5f, 3f, 0) }
         );
         if (clients.Length > 1)
+        {
             transform.position = spawnLocations[1];
-        else transform.position = spawnLocations[0];
+            pID = 1;
+        }
+        else
+        {
+            transform.position = spawnLocations[0];
+            pID = 0;
+        } 
     }
     #endregion
 
