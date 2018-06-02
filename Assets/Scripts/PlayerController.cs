@@ -8,8 +8,10 @@ public class PlayerController : NetworkBehaviour
     #region Variables
     private float Health;
     private GameObject[] clients;
+    private List<Vector3> built;
 
     public List<Vector3> spawnLocations;
+    public Grid grid;
     #endregion
 
     #region Properties
@@ -18,7 +20,9 @@ public class PlayerController : NetworkBehaviour
 
     #region Events
     void Awake()
-    { 
+    {
+        grid = FindObjectOfType<Grid>();
+        built = new List<Vector3>();
         clients = GameObject.FindGameObjectsWithTag("Player");
         Health = 50f;
         SpawnPlayer();
@@ -58,17 +62,17 @@ public class PlayerController : NetworkBehaviour
     #region Methods
     private void Build(Ray ray, RaycastHit hit)
     {
-        /*GameObject g = Instantiate
-          (
-               GameController.Instance.buildings[Random.Range(0, GameController.Instance.buildings.Length)],
-               GameController.Instance.buildings[0],
-               hit.point.MoveToAxisPosition(Axis.Y, 1, ray.direction), 
-               Quaternion.identity
-          );*/
-        //NetworkServer.Spawn(g);
-        CmdSendBuildingInfo(GameController.Instance.buildings[0].name, hit.point.MoveToAxisPosition(Axis.Y, 1, ray.direction), Quaternion.identity);
+        Vector3 pos = grid.GetNearestPointOnGrid(hit.point);
+        pos.y = 1f;
+        if(built.Contains(pos))
+            return;
+        built.Add(pos);
+        CmdSendBuildingInfo(
+            GameController.Instance.buildings[0].name, 
+            pos, 
+            Quaternion.identity
+        );
     }
-
     [Command]
     void CmdSendBuildingInfo(string name,Vector3 pos,Quaternion rot)
     {
