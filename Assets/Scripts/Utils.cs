@@ -10,6 +10,8 @@ public enum Axis
     Z
 }
 
+public delegate void TargetGO(GameObject g);
+
 public static class Utils 
 {
     #region Methods
@@ -64,9 +66,30 @@ public static class Utils
         t.anchoredPosition = Vector2.zero;
         t.sizeDelta = Vector2.zero;
     }
+
+    /// <summary>
+    /// Move the given rigidbody's position by a set amount
+    /// </summary>
+    /// <param name="r">The rigidbody to use</param>
+    /// <param name="pos">How much to move the position by</param>
+    public static void MovePositionBy(this Rigidbody r, Vector3 pos)
+    {
+        r.MovePosition(r.position + pos);
+    }
 	#endregion
 	
 	#region Coroutines
-	
+    /// <summary>
+    /// Call a function after a set amount of time
+    /// </summary>
+    /// <param name="t">The function to perform</param>
+    /// <param name="g">The game object to pass when called</param>
+    /// <param name="time">The seconds to wait before calling</param>
+    /// <returns></returns>
+	public static IEnumerator DoAfterTime(TargetGO t, GameObject g, float time)
+    {
+        yield return new WaitForSeconds(time);
+        t(g);
+    }
 	#endregion
 }

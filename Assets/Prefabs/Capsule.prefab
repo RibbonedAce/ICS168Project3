@@ -255,6 +255,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minion: {fileID: 1899729952512506}
+  fireInterval: 2
 --- !u!114 &114327597176734230
 MonoBehaviour:
   m_ObjectHideFlags: 1

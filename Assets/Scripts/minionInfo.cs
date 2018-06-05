@@ -6,6 +6,7 @@ using UnityEngine.Networking;
 public class minionInfo : NetworkBehaviour {
     public int maxHealth;
     public int currentHealth;
+
 	// Use this for initialization
 	void Start () {
         maxHealth = 100;
@@ -14,7 +15,11 @@ public class minionInfo : NetworkBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (!isServer)
+            return;
+
         if (currentHealth <= 0)
-            Destroy(gameObject);
+            NetworkServer.Destroy(gameObject);
+ 
     }
 }

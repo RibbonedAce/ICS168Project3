@@ -9,6 +9,11 @@ public class GameController : MonoBehaviour
     /// <para>The buildings that can spawn</para>
     /// </summary>
     public GameObject[] buildings;
+
+    /// <summary>
+    /// <para>The bullets spawned for each team</para>
+    /// </summary>
+    public GameObject[] bullets;
     #endregion
 
     #region Properties

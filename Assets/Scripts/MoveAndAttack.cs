@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Networking;
+
 public class MoveAndAttack : NetworkBehaviour {
 
     // Use this for initialization
@@ -10,10 +11,15 @@ public class MoveAndAttack : NetworkBehaviour {
     private Vector3 destinationPos;
     private Rigidbody _rigidbody;
     private NavMeshAgent _navMesh;
+    private minionInfo _minionInfo;
+
     public bool isSetDest;
     public int team;
-	void Awake () {
+	public override void OnStartServer () {
+        base.OnStartServer();
+
         _rigidbody = GetComponent<Rigidbody>();
+        _minionInfo = GetComponent<minionInfo>();
         //destination = GameObject.FindGameObjectWithTag("destination");
         //team decider
         if (transform.position.x <= 0)
@@ -28,7 +34,6 @@ public class MoveAndAttack : NetworkBehaviour {
             team = 1;
             gameObject.GetComponent<Renderer>().material.color = Color.red;
         }
-            
 
         _navMesh = GetComponent<NavMeshAgent>();
         isSetDest = false;
@@ -38,6 +43,9 @@ public class MoveAndAttack : NetworkBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (!isServer)
+            return;
+
         if (_navMesh != null && !isSetDest)
             SetDestination();
         else
@@ -55,9 +63,16 @@ public class MoveAndAttack : NetworkBehaviour {
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (!isServer)
+            return;
+
         if (collision.transform.tag == "destination")
         {
             Destroy(gameObject);
+        }
+        else if (collision.gameObject.CompareTag("bullet") && collision.gameObject.GetComponent<Bullet>().team != team)
+        {
+            _minionInfo.currentHealth -= 10;
         }
     }
 }
