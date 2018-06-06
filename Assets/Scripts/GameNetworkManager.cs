@@ -10,7 +10,10 @@ public class GameNetworkManager : NetworkManager
 	#endregion
 	
 	#region Properties
-	
+    /// <summary>
+    /// <para>The instance to reference</para>
+    /// </summary>
+	public static GameNetworkManager Instance { get; private set; }
 	#endregion
 	
 	#region Events
@@ -19,7 +22,10 @@ public class GameNetworkManager : NetworkManager
     /// </summary>
 	private void Awake() 
 	{
-		
+		if (Instance == null)
+        {
+            Instance = this;
+        }
 	}
 
     /// <summary>

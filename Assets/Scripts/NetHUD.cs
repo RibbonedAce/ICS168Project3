@@ -27,7 +27,7 @@ public class NetHUD : MonoBehaviour
     private GameObject buttonPrefab;
 
     /// <summary>
-    /// <para>The network manager to reference</para>
+    /// <para>The network manager to control</para>
     /// </summary>
     private NetworkManager manager;
 
@@ -35,6 +35,11 @@ public class NetHUD : MonoBehaviour
     /// <para>Whether the server is being shown</para>
     /// </summary>
     private bool m_ShowServer;
+
+    /// <summary>
+    /// <para>The coroutine to show matches</para>
+    /// </summary>
+    private Coroutine matchRoutine;
 
     /// <summary>
     /// <para>The match buttons instantiated</para>
@@ -57,7 +62,6 @@ public class NetHUD : MonoBehaviour
     /// </summary>
 	private void Awake() 
 	{
-        manager = GetComponent<NetworkManager>();
         matchButtons = new List<GameObject>();
 	}
 
@@ -66,7 +70,7 @@ public class NetHUD : MonoBehaviour
     /// </summary>
     private void Start()
     {
-
+        manager = GameNetworkManager.Instance;
 	}
 
     /// <summary>
@@ -162,27 +166,6 @@ public class NetHUD : MonoBehaviour
     }
 
     /// <summary>
-    /// Instantiate a button to join the currently tracked match
-    /// </summary>
-    public void MakeMatchButton()
-    {
-        GameObject g = Instantiate(buttonPrefab, elements[8].GetComponentInChildren<VerticalLayoutGroup>().transform);
-        matchButtons.Add(g);
-        g.GetComponentInChildren<Text>().text = "Join Match:" + currentMatch.name;
-        g.GetComponent<Button>().onClick.AddListener(SetMatchInfo);
-    }
-
-    /// <summary>
-    /// Set the manager's info for the currently tracked match
-    /// </summary>
-    private void SetMatchInfo()
-    {
-        manager.matchName = currentMatch.name;
-        manager.matchSize = (uint)currentMatch.currentSize;
-        manager.matchMaker.JoinMatch(currentMatch.networkId, "", "", "", 0, 0, manager.OnMatchJoined);
-    }
-
-    /// <summary>
     /// Set the match host to a preset choice
     /// </summary>
     /// <param name="choice">The type of match to set the manager to</param>
@@ -208,7 +191,55 @@ public class NetHUD : MonoBehaviour
     /// </summary>
     public void ShowMatches()
     {
-        manager.matchMaker.ListMatches(0, 20, "", false, 0, 0, manager.OnMatchList);
+        if (matchRoutine != null)
+        {
+            StopCoroutine(matchRoutine);
+        }
+        matchRoutine = StartCoroutine(CorShowMatches());
+    }
+
+    /// <summary>
+    /// Set the matches to null and delete buttons
+    /// </summary>
+    public void SetMatchesNull()
+    {
+        manager.matches = null;
+    }
+
+    /// <summary>
+    /// Instantiate a button to join the currently tracked match
+    /// </summary>
+    private void MakeMatchButton()
+    {
+        GameObject g = Instantiate(buttonPrefab, elements[8].GetComponentInChildren<VerticalLayoutGroup>().transform);
+        matchButtons.Add(g);
+        g.GetComponentInChildren<Text>().text = "Join Match: " + currentMatch.name;
+        g.GetComponent<MatchStorage>().SetMatch(currentMatch);
+    }
+
+    /// <summary>
+    /// Destroy a button that tracks a match
+    /// </summary>
+    /// <param name="g">The button to destroy</param>
+    private void DestroyMatchButton(GameObject g)
+    {
+        matchButtons.Remove(g);
+        Destroy(g);
+    }
+    #endregion
+
+    #region Coroutines
+    /// <summary>
+    /// Display matches over time
+    /// </summary>
+    /// <returns>The routine of getting matches</returns>
+    private IEnumerator CorShowMatches()
+    {
+        while(matchButtons.Count > 0)
+        {
+            DestroyMatchButton(matchButtons[0]);
+        }
+        yield return manager.matchMaker.ListMatches(0, 20, "", false, 0, 0, manager.OnMatchList);
         if (manager.matches != null)
         {
             foreach (UnityEngine.Networking.Match.MatchInfoSnapshot m in manager.matches)
@@ -218,21 +249,5 @@ public class NetHUD : MonoBehaviour
             }
         }
     }
-
-    /// <summary>
-    /// Set the matches to null and delete buttons
-    /// </summary>
-    public void SetMatchesNull()
-    {
-        manager.matches = null;
-        foreach (GameObject mb in matchButtons)
-        {
-            Destroy(mb);
-        }
-    }
-    #endregion
-
-    #region Coroutines
-
     #endregion
 }

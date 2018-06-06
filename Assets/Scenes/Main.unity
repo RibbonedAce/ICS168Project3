@@ -309,7 +309,7 @@ Prefab:
         type: 2}
       propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1398695924}
+      objectReference: {fileID: 1398695922}
     - target: {fileID: 114284995115914258, guid: 7706458cbe3b6cf4a8c0dbe23d233811,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
