@@ -14,6 +14,7 @@ public class MoveAndAttack : NetworkBehaviour {
     private minionInfo _minionInfo;
 
     public bool isSetDest;
+    [SyncVar(hook = "SetTeam")]
     public int team;
 	public override void OnStartServer () {
         base.OnStartServer();
@@ -24,15 +25,13 @@ public class MoveAndAttack : NetworkBehaviour {
         //team decider
         if (transform.position.x <= 0)
         {
+            SetTeam(0);
             destinationPos = new Vector3(9.5f, 1, 0);
-            team = 0;
-            gameObject.GetComponent<Renderer>().material.color = Color.blue;
         }
         else
         {
+            SetTeam(1);
             destinationPos = new Vector3(-9.5f, 1, 0);
-            team = 1;
-            gameObject.GetComponent<Renderer>().material.color = Color.red;
         }
 
         _navMesh = GetComponent<NavMeshAgent>();
@@ -52,6 +51,12 @@ public class MoveAndAttack : NetworkBehaviour {
             _navMesh.isStopped = true;
 	}
 
+    private void SetTeam(int value)
+    {
+        team = value;
+        gameObject.GetComponent<Renderer>().material = GameController.Instance.troopColors[team];
+    }
+
     private void SetDestination()
     {
         isSetDest = true;
@@ -66,13 +71,14 @@ public class MoveAndAttack : NetworkBehaviour {
         if (!isServer)
             return;
 
+        if (collision.transform.tag == "bullet")
+        {
+            Debug.Log("Bullet");
+        }
+
         if (collision.transform.tag == "destination")
         {
             Destroy(gameObject);
-        }
-        else if (collision.gameObject.CompareTag("bullet") && collision.gameObject.GetComponent<Bullet>().team != team)
-        {
-            _minionInfo.currentHealth -= 10;
         }
     }
 }

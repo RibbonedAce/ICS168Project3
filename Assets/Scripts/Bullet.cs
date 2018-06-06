@@ -75,6 +75,7 @@ public class Bullet : NetworkBehaviour
 
         if (other.CompareTag("minion") && other.GetComponent<MoveAndAttack>().team != team)
         {
+            other.GetComponent<minionInfo>().currentHealth -= 10;
             NetworkServer.Destroy(gameObject);
         }
     }

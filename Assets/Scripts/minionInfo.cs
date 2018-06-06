@@ -5,6 +5,7 @@ using UnityEngine.Networking;
 
 public class minionInfo : NetworkBehaviour {
     public int maxHealth;
+    [SyncVar]
     public int currentHealth;
 
 	// Use this for initialization
@@ -20,6 +21,5 @@ public class minionInfo : NetworkBehaviour {
 
         if (currentHealth <= 0)
             NetworkServer.Destroy(gameObject);
- 
     }
 }

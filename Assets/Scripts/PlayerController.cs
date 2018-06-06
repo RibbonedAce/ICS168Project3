@@ -67,7 +67,7 @@ public class PlayerController : NetworkBehaviour
     private void Build(Ray ray, RaycastHit hit)
     {
         Vector3 pos = grid.GetNearestPointOnGrid(hit.point);
-        Debug.Log(pos);
+        //Debug.Log(pos);
         pos.y = 1f;
         if(built.Contains(pos))
             return;

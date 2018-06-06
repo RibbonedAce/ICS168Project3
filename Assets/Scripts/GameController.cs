@@ -14,6 +14,11 @@ public class GameController : MonoBehaviour
     /// <para>The bullets spawned for each team</para>
     /// </summary>
     public GameObject[] bullets;
+
+    /// <summary>
+    /// <para>The colors for the troop teams</para>
+    /// </summary>
+    public Material[] troopColors;
     #endregion
 
     #region Properties

@@ -8,29 +8,28 @@ public class attackTrigger : NetworkBehaviour
     private float firedLast;
     private int team;
     private GameObject enemy;
+    private MoveAndAttack _maa;
 
     // Use this for initialization
-    void Start()
+    void Awake()
     {
-        if (!minion.GetComponent<MoveAndAttack>().isServer)
-            return;
-
+        _maa = minion.GetComponent<MoveAndAttack>();
         enemy = null;
-        team = minion.GetComponent<MoveAndAttack>().team;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!minion.GetComponent<MoveAndAttack>().isServer)
+        if (!_maa.isServer)
             return;
 
-        Debug.Log(enemy);
+        team = _maa.team;
+        //Debug.Log(enemy);
         if (enemy == null)
-            minion.GetComponent<MoveAndAttack>().isSetDest = false;
+            _maa.isSetDest = false;
         else
         {
-            minion.GetComponent<MoveAndAttack>().isSetDest = true;
+            _maa.isSetDest = true;
             if (firedLast >= fireInterval)
             {
                 Quaternion rot = Quaternion.Euler(90f, Vector3.SignedAngle(Vector3.forward, enemy.transform.position - transform.position, Vector3.up), 0f);
@@ -44,7 +43,7 @@ public class attackTrigger : NetworkBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!minion.GetComponent<MoveAndAttack>().isServer)
+        if (!_maa.isServer)
             return;
 
         if (other.tag == "minion" && enemy == null && other.GetComponent<MoveAndAttack>().team != team)
@@ -55,7 +54,7 @@ public class attackTrigger : NetworkBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (!minion.GetComponent<MoveAndAttack>().isServer)
+        if (!_maa.isServer)
             return;
 
         if (other.gameObject == enemy)

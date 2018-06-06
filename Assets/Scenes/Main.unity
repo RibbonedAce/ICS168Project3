@@ -1211,7 +1211,12 @@ MonoBehaviour:
   - {fileID: 1268302582974526, guid: cfd1c73141f192445a3f406e7237c18b, type: 2}
   - {fileID: 1590913602798300, guid: 0056a48fd6d660f4599dbd33038e6500, type: 2}
   - {fileID: 1704097491686296, guid: cc52cb24d7962b54285f3332d2357518, type: 2}
-  bullets: []
+  bullets:
+  - {fileID: 1428849069294906, guid: 8583ef0f7eecdee4d9eb8ab2aeff4283, type: 2}
+  - {fileID: 1614277356171604, guid: 51eaf860f6cf19e41b19287553f3a15b, type: 2}
+  troopColors:
+  - {fileID: 2100000, guid: 929df3f8a5c8c9f42850d9157b4b65c0, type: 2}
+  - {fileID: 2100000, guid: a50cda77369ed1a40962f19a7221689a, type: 2}
 --- !u!224 &2136320636 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224180327119820802, guid: 7706458cbe3b6cf4a8c0dbe23d233811,
