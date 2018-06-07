@@ -72,9 +72,20 @@ public class ButtonExpansion : MonoBehaviour
     /// <summary>
     /// Update is called once per frame
     /// </summary>
-    private void Update() 
-	{
+    private void Update()
+    {
 
+    }
+
+    /// <summary>
+    /// Called when script enabled or game object set active
+    /// </summary>
+    private void OnEnable()
+    {
+        if (_rectTransform != null)
+        {
+            Contract();
+        }
     }
     #endregion
 
@@ -101,6 +112,15 @@ public class ButtonExpansion : MonoBehaviour
             StopCoroutine(changeRoutine);
         }
         changeRoutine = StartCoroutine(Expand(1f));
+    }
+
+    /// <summary>
+    /// Contract the button immediately
+    /// </summary>
+    public void Contract()
+    {
+        _rectTransform.SetAnchors(contractMinAnchor, contractMaxAnchor);
+        compactButton.gameObject.SetActive(true);
     }
     #endregion
 

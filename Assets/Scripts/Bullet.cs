@@ -61,6 +61,9 @@ public class Bullet : NetworkBehaviour
     /// </summary>
     private void FixedUpdate() 
 	{
+        if (!isServer)
+            return;
+
         _rigidbody.MovePositionBy(transform.up * Time.deltaTime * speed);
 	}
 
