@@ -91,5 +91,16 @@ public static class Utils
         yield return new WaitForSeconds(time);
         t(g);
     }
+
+    /// <summary>
+    /// Play an audio source until it is finished
+    /// </summary>
+    /// <param name="a">The audio source to use</param>
+    /// <returns>The length of the clip</returns>
+    public static IEnumerator PlayFull(this AudioSource a)
+    {
+        a.Play();
+        yield return new WaitForSeconds(a.clip.length);
+    }
 	#endregion
 }

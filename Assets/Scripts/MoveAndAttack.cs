@@ -16,6 +16,8 @@ public class MoveAndAttack : NetworkBehaviour {
     public bool isSetDest;
     [SyncVar(hook = "SetTeam")]
     public int team;
+    public GameObject afterEffect;
+
 	public override void OnStartServer () {
         base.OnStartServer();
 
@@ -50,6 +52,11 @@ public class MoveAndAttack : NetworkBehaviour {
         else
             _navMesh.isStopped = true;
 	}
+
+    private void OnDestroy()
+    {
+        GameObject g = Instantiate(afterEffect, transform.position, Quaternion.identity);
+    }
 
     private void SetTeam(int value)
     {

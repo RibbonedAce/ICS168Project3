@@ -281,6 +281,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isSetDest: 0
   team: 0
+  afterEffect: {fileID: 1725779667141426, guid: cff5b3321bcb4a14e999786b65035080,
+    type: 2}
 --- !u!114 &114677380443862418
 MonoBehaviour:
   m_ObjectHideFlags: 1

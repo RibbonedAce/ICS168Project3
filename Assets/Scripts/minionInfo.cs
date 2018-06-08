@@ -20,6 +20,8 @@ public class minionInfo : NetworkBehaviour {
             return;
 
         if (currentHealth <= 0)
+        {
             NetworkServer.Destroy(gameObject);
+        }
     }
 }
