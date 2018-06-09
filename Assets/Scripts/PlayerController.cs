@@ -2,18 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 public class PlayerController : NetworkBehaviour
 {
     #region Variables
-    private float Health;
+    private float health;
     private GameObject[] clients;
     private List<Vector3> built;
+    private float nextTime;//if currentTime > nextTime, add 1 gold.
+
     [SerializeField]
-    private int pID = -1;
+    private int pID;
+    [SerializeField]
+    private float gold;
+    [SerializeField]
+    private float goldRatePerSec;
 
     public List<Vector3> spawnLocations;
     public Grid grid;
+    public Transform text;
+    public GameObject canvas;
     #endregion
 
     #region Properties
@@ -26,7 +35,10 @@ public class PlayerController : NetworkBehaviour
         grid = FindObjectOfType<Grid>();
         built = new List<Vector3>();
         clients = GameObject.FindGameObjectsWithTag("Player");
-        Health = 50f;
+        health = 50f;
+        canvas = GameObject.Find("Canvas");
+        text = canvas.transform.FindChild("CurrencyText");
+        nextTime = 0;
         SpawnPlayer();
     }
 
@@ -35,7 +47,9 @@ public class PlayerController : NetworkBehaviour
     {
         if (!isLocalPlayer)
             return;
-
+        if (health <= 0)
+            return;
+        
         if (Input.touchCount > 0)
         {
             Touch t = Input.GetTouch(0);
@@ -60,7 +74,10 @@ public class PlayerController : NetworkBehaviour
                     Build(ray, hit);
             }
         }
-	}
+
+        AddGoldByTime();
+        text.GetComponent<Text>().text = "Gold: " + gold;
+    }
     #endregion
 
     #region Methods
@@ -81,6 +98,11 @@ public class PlayerController : NetworkBehaviour
     [Command]
     void CmdSendBuildingInfo(string name,Vector3 pos,Quaternion rot)
     {
+        int buildingCost = GetBuildingCost(name);
+        Debug.Log(buildingCost);
+        if (gold - buildingCost < 0)
+            return;
+        gold -= buildingCost;
         GameObject r;
         switch (name)
         {
@@ -105,22 +127,61 @@ public class PlayerController : NetworkBehaviour
         }
     }
 
+    private int GetBuildingCost(string name)
+    {
+        int cost;
+        switch (name)
+        {
+            case "Common":
+                cost = 5;
+                break;
+            case "Uncommon":
+                cost = 7;
+                break;
+            case "Rare":
+                cost = 10;
+                break;
+            case "Mythic":
+                cost = 15;
+                break;
+            default:
+                cost = 0;
+                break;
+        }
+        return cost;
+    }
     private void SpawnPlayer()
     {
         spawnLocations = new List<Vector3>
         (
-            new Vector3[] { new Vector3(-8.5f, 3f, 0), new Vector3(8.5f, 3f, 0) }
+            new Vector3[] { new Vector3(-8.5f, 1f, 0), new Vector3(8.5f, 1f, 0) }
         );
         if (clients.Length > 1)
         {
             transform.position = spawnLocations[1];
             pID = 1;
+            transform.name = "Player2";
         }
         else
         {
             transform.position = spawnLocations[0];
             pID = 0;
+            transform.name = "Player1";
         } 
+    }
+
+    public void AddGold(float g)
+    {
+        gold += g;
+    }
+
+    private void AddGoldByTime()
+    {
+        if(Time.time > nextTime)
+        {
+            nextTime = Time.time + goldRatePerSec;
+            gold += 1f;
+        }
     }
     #endregion
 

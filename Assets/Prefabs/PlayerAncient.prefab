@@ -110,8 +110,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 000551d930df14941ac8999029f3c8f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pID: -1
+  gold: 5
+  goldRatePerSec: 2
   spawnLocations: []
   grid: {fileID: 114836281865556610, guid: 813c90ca2dcdb344f960bed14452ae1a, type: 2}
+  text: {fileID: 0}
+  canvas: {fileID: 0}
 --- !u!114 &114400162224398590
 MonoBehaviour:
   m_ObjectHideFlags: 1

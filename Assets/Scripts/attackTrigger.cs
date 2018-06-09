@@ -46,7 +46,7 @@ public class attackTrigger : NetworkBehaviour
         if (!_maa.isServer)
             return;
 
-        if (other.tag == "minion" && enemy == null && other.GetComponent<MoveAndAttack>().team != team)
+        if ((other.tag == "minion" || other.tag == "building") && enemy == null && other.GetComponent<MoveAndAttack>().team != team)
             enemy = other.gameObject;
     }
 

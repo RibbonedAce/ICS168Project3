@@ -28,14 +28,14 @@ public class MoveAndAttack : NetworkBehaviour {
         if (transform.position.x <= 0)
         {
             SetTeam(0);
-            destinationPos = new Vector3(9.5f, 1, 0);
+            destinationPos = GetDestination();
         }
         else
         {
             SetTeam(1);
-            destinationPos = new Vector3(-9.5f, 1, 0);
+            destinationPos = GetDestination();
         }
-
+        //Debug.Log(destinationPos);
         _navMesh = GetComponent<NavMeshAgent>();
         isSetDest = false;
         if (_navMesh == null)
@@ -87,5 +87,23 @@ public class MoveAndAttack : NetworkBehaviour {
         {
             Destroy(gameObject);
         }
+    }
+    private Vector3 GetDestination()
+    {
+        GameObject EnemyPosition;
+        if(team == 0)
+        {
+            EnemyPosition = GameObject.Find("Player2");
+        }
+        else
+        {
+            EnemyPosition = GameObject.Find("Player1");
+        }
+        if (EnemyPosition == null)
+        {
+            Destroy(gameObject, 3.0f);
+            return new Vector3(0, 1, 0);
+        }
+        return EnemyPosition.transform.position;
     }
 }
