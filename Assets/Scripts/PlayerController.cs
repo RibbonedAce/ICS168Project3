@@ -76,7 +76,7 @@ public class PlayerController : NetworkBehaviour
         }
 
         AddGoldByTime();
-        text.GetComponent<Text>().text = "Gold: " + gold;
+        text.GetComponent<Text>().text = " X " + gold;
     }
     #endregion
 
