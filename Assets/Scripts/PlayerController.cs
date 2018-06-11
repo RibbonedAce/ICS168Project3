@@ -93,7 +93,7 @@ public class PlayerController : NetworkBehaviour
             return;
         built.Add(pos);
         CmdSendBuildingInfo(
-            GameController.Instance.buildings[0].name, 
+            GameController.Instance.buildings[1].name, 
             pos, 
             Quaternion.identity
         );
@@ -102,7 +102,7 @@ public class PlayerController : NetworkBehaviour
     void CmdSendBuildingInfo(string name,Vector3 pos,Quaternion rot)
     {
         int buildingCost = GetBuildingCost(name);
-        Debug.Log(buildingCost);
+        Debug.Log(name);
         if (gold - buildingCost < 0)
             return;
         gold -= buildingCost;

@@ -4,13 +4,12 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 public class minionInfo : NetworkBehaviour {
+    [SyncVar,SerializeField]
     public int maxHealth;
-    [SyncVar]
     public int currentHealth;
 
 	// Use this for initialization
 	void Start () {
-        maxHealth = 100;
         currentHealth = maxHealth;
 	}
 	
