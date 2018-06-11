@@ -84,8 +84,9 @@ public class MoveAndAttack : NetworkBehaviour {
             Debug.Log("Bullet");
         }
 
-        if (collision.transform.tag == "destination")
+        if (collision.transform.tag == "Player")
         {
+            Debug.Log("Player");
             collision.gameObject.GetComponent<PlayerController>().TakeDamage(1f);
             NetworkServer.Destroy(gameObject);
         }
