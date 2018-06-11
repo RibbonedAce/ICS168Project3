@@ -86,7 +86,8 @@ public class MoveAndAttack : NetworkBehaviour {
 
         if (collision.transform.tag == "destination")
         {
-            Destroy(gameObject);
+            collision.gameObject.GetComponent<PlayerController>().TakeDamage(1f);
+            NetworkServer.Destroy(gameObject);
         }
     }
     private Vector3 GetDestination()
