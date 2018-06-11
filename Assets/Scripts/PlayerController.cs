@@ -7,10 +7,12 @@ using UnityEngine.UI;
 public class PlayerController : NetworkBehaviour
 {
     #region Variables
+    [SyncVar(hook = "SetHealth")]
     private float health;
     private GameObject[] clients;
     private List<Vector3> built;
     private float nextTime;//if currentTime > nextTime, add 1 gold.
+    private AudioSource _audioSource;
 
     [SerializeField]
     private int pID;
@@ -32,12 +34,13 @@ public class PlayerController : NetworkBehaviour
     #region Events
     void Awake()
     {
+        _audioSource = GetComponent<AudioSource>();
         grid = FindObjectOfType<Grid>();
         built = new List<Vector3>();
         clients = GameObject.FindGameObjectsWithTag("Player");
         health = 50f;
         canvas = GameObject.Find("Canvas");
-        text = canvas.transform.FindChild("CurrencyText");
+        text = canvas.transform.Find("CurrencyText");
         nextTime = 0;
         SpawnPlayer();
     }
@@ -168,6 +171,20 @@ public class PlayerController : NetworkBehaviour
             pID = 0;
             transform.name = "Player1";
         } 
+    }
+
+    public void TakeDamage(float damage)
+    {
+        SetHealth(health - damage);
+    }
+
+    private void SetHealth(float value)
+    {
+        if (value < health)
+        {
+            _audioSource.Play();
+        }
+        health = value;
     }
 
     public void AddGold(float g)
