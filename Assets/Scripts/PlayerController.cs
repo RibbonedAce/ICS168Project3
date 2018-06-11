@@ -23,6 +23,7 @@ public class PlayerController : NetworkBehaviour
     [SerializeField]
     private float goldRatePerSec;
 
+    public AudioClip[] clips;
     public List<Vector3> spawnLocations;
     public Grid grid;
     #endregion
@@ -32,6 +33,12 @@ public class PlayerController : NetworkBehaviour
     #endregion
 
     #region Events
+    public override void OnStartServer()
+    {
+        base.OnStartServer();
+        SetHealth(50);
+    }
+
     void Awake()
     {
         _audioSource = GetComponent<AudioSource>();
