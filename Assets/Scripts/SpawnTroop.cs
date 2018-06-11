@@ -15,7 +15,7 @@ public class SpawnTroop : NetworkBehaviour {
         base.OnStartServer();
         //Debug.Log("Building Type: " + gameObject.name);
         spawnLocation = transform.position - new Vector3(0, 0, 1);
-        spawnRate = 5.0f;
+        spawnRate = 8.0f;
         StartCoroutine("Spawn");
     }
 	

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
 
-public class attackTrigger : NetworkBehaviour
+public class attackTrigger : MonoBehaviour
 {
     [SerializeField]
     protected GameObject minion;
@@ -23,8 +23,8 @@ public class attackTrigger : NetworkBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
-        if (!_maa.isServer)
-            return;
+        //if (!_maa.isServer)
+        //   return;
 
         team = _maa.team;
         //Debug.Log(enemy);

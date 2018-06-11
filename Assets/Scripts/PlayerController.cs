@@ -11,6 +11,8 @@ public class PlayerController : NetworkBehaviour
     private GameObject[] clients;
     private List<Vector3> built;
     private float nextTime;//if currentTime > nextTime, add 1 gold.
+    private Transform text;
+    private GameObject canvas;
 
     [SerializeField]
     private int pID;
@@ -21,8 +23,6 @@ public class PlayerController : NetworkBehaviour
 
     public List<Vector3> spawnLocations;
     public Grid grid;
-    public Transform text;
-    public GameObject canvas;
     #endregion
 
     #region Properties
@@ -59,7 +59,7 @@ public class PlayerController : NetworkBehaviour
                 RaycastHit hit;
                 if (Physics.Raycast(ray, out hit))
                 {
-                    if((hit.transform.name == "LeftField" && pID == 0) || ((hit.transform.name == "RightField" && pID == 1)))
+                    if((hit.transform.name == "LeftField" && pID == 0) || (hit.transform.name == "RightField" && pID == 1))
                         Build(ray, hit);
                 }
             }
@@ -70,7 +70,7 @@ public class PlayerController : NetworkBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             { 
-                if((hit.transform.name == "LeftField" && pID == 0) || ((hit.transform.name == "RightField" && pID == 1)))
+                if((hit.transform.name == "LeftField" && pID == 0) || (hit.transform.name == "RightField" && pID == 1))
                     Build(ray, hit);
             }
         }
@@ -133,7 +133,7 @@ public class PlayerController : NetworkBehaviour
         switch (name)
         {
             case "Common":
-                cost = 5;
+                cost = 3;
                 break;
             case "Uncommon":
                 cost = 7;

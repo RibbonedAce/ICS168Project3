@@ -20,7 +20,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4489281983827194}
   - component: {fileID: 65171494176067592}
-  - component: {fileID: 114926229082678660}
   - component: {fileID: 114352835174310840}
   m_Layer: 9
   m_Name: attackRangeTrigger
@@ -380,38 +379,6 @@ MonoBehaviour:
   m_SnapThreshold: 5
   m_InterpolateRotation: 1
   m_InterpolateMovement: 1
---- !u!114 &114926229082678660
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1293729111655040}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 107
-    i1: 72
-    i2: 9
-    i3: 138
-    i4: 175
-    i5: 145
-    i6: 194
-    i7: 20
-    i8: 40
-    i9: 11
-    i10: 158
-    i11: 24
-    i12: 219
-    i13: 92
-    i14: 223
-    i15: 0
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0
 --- !u!114 &114970565896639218
 MonoBehaviour:
   m_ObjectHideFlags: 1
