@@ -227,7 +227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f14321dc838faab4598a9b62cdcffc10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  troop: {fileID: 1899729952512506, guid: 634526a9097a55549b4114f336af5a34, type: 2}
+  troop: {fileID: 1534153746308190, guid: 6b48098aaf91c214280b9e18db5cdf00, type: 2}
 --- !u!114 &114661713931750410
 MonoBehaviour:
   m_ObjectHideFlags: 1

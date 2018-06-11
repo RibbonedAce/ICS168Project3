@@ -37,7 +37,7 @@ public class PlayerController : NetworkBehaviour
         clients = GameObject.FindGameObjectsWithTag("Player");
         health = 50f;
         canvas = GameObject.Find("Canvas");
-        text = canvas.transform.FindChild("CurrencyText");
+        text = canvas.transform.Find("CurrencyText");
         nextTime = 0;
         SpawnPlayer();
     }
@@ -90,7 +90,7 @@ public class PlayerController : NetworkBehaviour
             return;
         built.Add(pos);
         CmdSendBuildingInfo(
-            GameController.Instance.buildings[0].name, 
+            GameController.Instance.buildings[1].name, 
             pos, 
             Quaternion.identity
         );
@@ -99,7 +99,7 @@ public class PlayerController : NetworkBehaviour
     void CmdSendBuildingInfo(string name,Vector3 pos,Quaternion rot)
     {
         int buildingCost = GetBuildingCost(name);
-        Debug.Log(buildingCost);
+        Debug.Log(name);
         if (gold - buildingCost < 0)
             return;
         gold -= buildingCost;

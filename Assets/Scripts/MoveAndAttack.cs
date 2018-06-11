@@ -71,6 +71,7 @@ public class MoveAndAttack : NetworkBehaviour {
         //if(destination != null)
         //    _navMesh.SetDestination(destination.transform.position);
         _navMesh.SetDestination(destinationPos);
+        //Debug.Log("Set Dest");
     }
 
     private void OnCollisionEnter(Collision collision)
