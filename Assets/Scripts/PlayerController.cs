@@ -36,7 +36,7 @@ public class PlayerController : NetworkBehaviour
     public override void OnStartServer()
     {
         base.OnStartServer();
-        SetHealth(50);
+        SetHealth(2);
     }
 
     void Awake()
@@ -58,7 +58,11 @@ public class PlayerController : NetworkBehaviour
         if (!isLocalPlayer)
             return;
         if (health <= 0)
+        {
+            FindObjectOfType<NetworkManager>().StopHost();
+            FindObjectOfType<GameController>().PlayDefeat();
             return;
+        }
         
         if (Input.touchCount > 0)
         {

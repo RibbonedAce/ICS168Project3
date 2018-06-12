@@ -19,6 +19,16 @@ public class GameController : MonoBehaviour
     /// <para>The colors for the troop teams</para>
     /// </summary>
     public Material[] troopColors;
+
+    /// <summary>
+    /// <para>The sound to play when defeated</para>
+    /// </summary>
+    public AudioClip defeatClip;
+
+    /// <summary>
+    /// <para>The audio source component attached</para>
+    /// </summary>
+    private AudioSource _audioSource;
     #endregion
 
     #region Properties
@@ -42,6 +52,7 @@ public class GameController : MonoBehaviour
         {
             Destroy(this);
         }
+        _audioSource = GetComponent<AudioSource>();
 	}
 
     /// <summary>
@@ -62,7 +73,14 @@ public class GameController : MonoBehaviour
 	#endregion
 	
 	#region Methods
-	
+    /// <summary>
+    /// Play the defeat sound
+    /// </summary>
+	public void PlayDefeat()
+    {
+        _audioSource.clip = defeatClip;
+        _audioSource.Play();
+    }
 	#endregion
 	
 	#region Coroutines
