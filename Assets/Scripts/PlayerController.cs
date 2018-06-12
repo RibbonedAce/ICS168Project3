@@ -93,14 +93,20 @@ public class PlayerController : NetworkBehaviour
     #region Methods
     private void Build(Ray ray, RaycastHit hit)
     {
+        string name = GameController.Instance.buildings[1].name;
+        int buildingCost = GetBuildingCost(name);
+        Debug.Log(name);
         Vector3 pos = grid.GetNearestPointOnGrid(hit.point);
         //Debug.Log(pos);
         pos.y = 1f;
         if(built.Contains(pos))
             return;
+        if (gold - buildingCost < 0)
+            return;
+        gold -= buildingCost;
         built.Add(pos);
         CmdSendBuildingInfo(
-            GameController.Instance.buildings[1].name, 
+            name, 
             pos, 
             Quaternion.identity
         );
@@ -108,11 +114,6 @@ public class PlayerController : NetworkBehaviour
     [Command]
     void CmdSendBuildingInfo(string name,Vector3 pos,Quaternion rot)
     {
-        int buildingCost = GetBuildingCost(name);
-        Debug.Log(name);
-        if (gold - buildingCost < 0)
-            return;
-        gold -= buildingCost;
         GameObject r;
         switch (name)
         {
