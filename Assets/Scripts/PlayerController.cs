@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class PlayerController : NetworkBehaviour
 {
     #region Variables
-    [SyncVar(hook = "SetHealth")]
+    [SyncVar(hook = "SetHealth"),SerializeField]
     private float health;
     private GameObject[] clients;
     private List<Vector3> built;
@@ -15,6 +15,7 @@ public class PlayerController : NetworkBehaviour
     private Transform text;
     private GameObject canvas;
     private AudioSource _audioSource;
+    private string buildingType;
 
     [SerializeField]
     private int pID;
@@ -74,7 +75,7 @@ public class PlayerController : NetworkBehaviour
             GameNetworkManager.Instance.StopHost();
             return;
         }
-        
+   
         if (Input.touchCount > 0)
         {
             Touch t = Input.GetTouch(0);
@@ -108,7 +109,7 @@ public class PlayerController : NetworkBehaviour
     #region Methods
     private void Build(Ray ray, RaycastHit hit)
     {
-        string name = GameController.Instance.buildings[1].name;
+        string name = GameController.Instance.GetBuildingName();
         int buildingCost = GetBuildingCost(name);
         Debug.Log(name);
         Vector3 pos = grid.GetNearestPointOnGrid(hit.point);

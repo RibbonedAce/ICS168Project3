@@ -343,9 +343,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minion: {fileID: 1534153746308190}
-  attackInterval: 4
+  attackInterval: 2
   attackLast: 0
   attackDistance: 2
+  damage: 100
 --- !u!114 &114482229011166186
 MonoBehaviour:
   m_ObjectHideFlags: 1

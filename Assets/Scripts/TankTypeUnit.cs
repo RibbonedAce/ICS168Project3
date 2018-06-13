@@ -9,6 +9,8 @@ public class TankTypeUnit : attackTrigger {
 
     [SerializeField]
     private float attackDistance;
+    [SerializeField]
+    private int damage;
     private Transform parent = null;
     // Use this for initialization
     protected override void Awake() {
@@ -24,13 +26,11 @@ public class TankTypeUnit : attackTrigger {
         if (enemy != null && _maa.isSetDest)
         {
             parent.GetComponent<MoveAndAttack>().SetDestination(enemy.transform.position);
-            Debug.Log("Enemy found");
             Attack();
         }
         else if (enemy == null)
         {
             parent.GetComponent<MoveAndAttack>().SetDestination(parent.GetComponent<MoveAndAttack>().destinationPos);
-            Debug.Log("Enemy not found");
         }
     }
 
@@ -47,11 +47,14 @@ public class TankTypeUnit : attackTrigger {
     private void Attack()
     {
         float dist = Vector3.Distance(GetComponentInParent<Transform>().position, enemy.transform.position);
-        if (attackLast >= attackInterval && dist <= attackDistance && enemy != null)
+        if (dist <= attackDistance && enemy != null)
         {
-            enemy.GetComponent<minionInfo>().currentHealth -= 10;
-            attackLast = 0;
+            Debug.Log("attackLast: " + attackLast + "Time: " + Time.time);
+            if (attackLast <= Time.time)
+            {
+                enemy.GetComponent<minionInfo>().currentHealth -= damage;
+                attackLast = Time.time + attackInterval;
+            }
         }
-        attackLast = Mathf.Min(attackLast + Time.deltaTime, attackInterval);
     }
 }

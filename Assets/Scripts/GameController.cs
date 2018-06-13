@@ -36,6 +36,7 @@ public class GameController : MonoBehaviour
     private AudioSource _audioSource;
     #endregion
 
+    private string buildingName = "Common";
     #region Properties
     /// <summary>
     /// <para>The instance to reference</para>
@@ -73,15 +74,22 @@ public class GameController : MonoBehaviour
     /// </summary>
     private void Update() 
 	{
-		
-	}
-	#endregion
-	
-	#region Methods
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+            buildingName = buildings[0].name;
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+            buildingName = buildings[1].name;
+        //if (Input.GetKeyDown(KeyCode.Alpha3))
+        //    buildingName = buildings[2].name;
+        //if (Input.GetKeyDown(KeyCode.Alpha4))
+        //    buildingName = buildings[3].name;
+    }
+    #endregion
+
+    #region Methods
     /// <summary>
     /// Play the defeat sound
     /// </summary>
-	public void PlayDefeat()
+    public void PlayDefeat()
     {
         _audioSource.clip = defeatClip;
         _audioSource.Play();
@@ -91,6 +99,11 @@ public class GameController : MonoBehaviour
     {
         _audioSource.clip = victoryClip;
         _audioSource.Play();
+    }
+
+    public string GetBuildingName()
+    {
+        return buildingName;
     }
 	#endregion
 	
