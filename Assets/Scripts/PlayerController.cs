@@ -46,7 +46,6 @@ public class PlayerController : NetworkBehaviour
         grid = FindObjectOfType<Grid>();
         built = new List<Vector3>();
         clients = GameObject.FindGameObjectsWithTag("Player");
-        health = 50f;
         canvas = GameObject.Find("Canvas");
         text = canvas.transform.Find("CurrencyText");
         nextTime = 0;
