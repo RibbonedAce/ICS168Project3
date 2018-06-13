@@ -8,7 +8,6 @@ public class MoveAndAttack : NetworkBehaviour {
 
     // Use this for initialization
     //private GameObject destination;
-    private Vector3 destinationPos;
     private Rigidbody _rigidbody;
     private NavMeshAgent _navMesh;
     private minionInfo _minionInfo;
@@ -17,8 +16,9 @@ public class MoveAndAttack : NetworkBehaviour {
     [SyncVar(hook = "SetTeam")]
     public int team;
     public GameObject afterEffect;
+    public Vector3 destinationPos;
 
-	public override void OnStartServer () {
+    public override void OnStartServer () {
         base.OnStartServer();
 
         _rigidbody = GetComponent<Rigidbody>();
@@ -48,7 +48,7 @@ public class MoveAndAttack : NetworkBehaviour {
             return;
 
         if (_navMesh != null && !isSetDest)
-            SetDestination();
+            SetDestination(destinationPos);
         else
             _navMesh.isStopped = true;
 	}
@@ -64,14 +64,11 @@ public class MoveAndAttack : NetworkBehaviour {
         gameObject.GetComponent<Renderer>().material = GameController.Instance.troopColors[team];
     }
 
-    private void SetDestination()
+    public void SetDestination(Vector3 pos)
     {
         isSetDest = true;
         _navMesh.isStopped = false;
-        //if(destination != null)
-        //    _navMesh.SetDestination(destination.transform.position);
-        _navMesh.SetDestination(destinationPos);
-        //Debug.Log("Set Dest");
+        _navMesh.SetDestination(pos);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -91,7 +88,7 @@ public class MoveAndAttack : NetworkBehaviour {
             NetworkServer.Destroy(gameObject);
         }
     }
-    private Vector3 GetDestination()
+    public Vector3 GetDestination()
     {
         GameObject EnemyPosition;
         if(team == 0)
