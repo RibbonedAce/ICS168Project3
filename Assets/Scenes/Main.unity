@@ -1297,6 +1297,8 @@ MonoBehaviour:
   troopColors:
   - {fileID: 2100000, guid: 929df3f8a5c8c9f42850d9157b4b65c0, type: 2}
   - {fileID: 2100000, guid: a50cda77369ed1a40962f19a7221689a, type: 2}
+  defeatClip: {fileID: 8300000, guid: 5d7e665952c90b84ea8f9c4c143a6b66, type: 3}
+  victoryClip: {fileID: 8300000, guid: e20b338c96a2c9341b8d0f3d198f854d, type: 3}
 --- !u!82 &2101804058
 AudioSource:
   m_ObjectHideFlags: 0

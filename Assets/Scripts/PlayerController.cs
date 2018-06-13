@@ -55,12 +55,23 @@ public class PlayerController : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (health <= 0)
+        {
+            if (isLocalPlayer)
+            {
+                GameController.Instance.PlayDefeat();
+            }
+            else
+            {
+                GameController.Instance.PlayVictory();
+            }
+        }
+
         if (!isLocalPlayer)
             return;
         if (health <= 0)
         {
-            FindObjectOfType<NetworkManager>().StopHost();
-            FindObjectOfType<GameController>().PlayDefeat();
+            GameNetworkManager.Instance.StopHost();
             return;
         }
         

@@ -26,6 +26,11 @@ public class GameController : MonoBehaviour
     public AudioClip defeatClip;
 
     /// <summary>
+    /// <para>The sound to play when victorious</para>
+    /// </summary>
+    public AudioClip victoryClip;
+
+    /// <summary>
     /// <para>The audio source component attached</para>
     /// </summary>
     private AudioSource _audioSource;
@@ -79,6 +84,12 @@ public class GameController : MonoBehaviour
 	public void PlayDefeat()
     {
         _audioSource.clip = defeatClip;
+        _audioSource.Play();
+    }
+
+    public void PlayVictory()
+    {
+        _audioSource.clip = victoryClip;
         _audioSource.Play();
     }
 	#endregion

@@ -50,6 +50,7 @@ public class TankTypeUnit : attackTrigger {
         if (attackLast >= attackInterval && dist <= attackDistance && enemy != null)
         {
             enemy.GetComponent<minionInfo>().currentHealth -= 10;
+            attackLast = 0;
         }
         attackLast = Mathf.Min(attackLast + Time.deltaTime, attackInterval);
     }
