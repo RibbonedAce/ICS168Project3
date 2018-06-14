@@ -712,7 +712,7 @@ Prefab:
     - target: {fileID: 114226051857462232, guid: 7706458cbe3b6cf4a8c0dbe23d233811,
         type: 2}
       propertyPath: m_FontData.m_Alignment
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 114002694406355408, guid: 7706458cbe3b6cf4a8c0dbe23d233811,
         type: 2}
@@ -855,6 +855,16 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1029575590310954, guid: 7706458cbe3b6cf4a8c0dbe23d233811, type: 2}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114226051857462232, guid: 7706458cbe3b6cf4a8c0dbe23d233811,
+        type: 2}
+      propertyPath: m_Text
+      value: Build and Conquer
+      objectReference: {fileID: 0}
+    - target: {fileID: 114226051857462232, guid: 7706458cbe3b6cf4a8c0dbe23d233811,
+        type: 2}
+      propertyPath: m_FontData.m_FontStyle
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
