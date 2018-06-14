@@ -36,7 +36,7 @@ public class GameController : MonoBehaviour
     private AudioSource _audioSource;
     #endregion
 
-    private string buildingName = "Common";
+    public string buildingName = "Common";
     #region Properties
     /// <summary>
     /// <para>The instance to reference</para>
