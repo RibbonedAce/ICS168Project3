@@ -567,7 +567,7 @@ Prefab:
     - target: {fileID: 114541252860978324, guid: 7706458cbe3b6cf4a8c0dbe23d233811,
         type: 2}
       propertyPath: contractMaxAnchor.y
-      value: 1
+      value: 0.17
       objectReference: {fileID: 0}
     - target: {fileID: 114541252860978324, guid: 7706458cbe3b6cf4a8c0dbe23d233811,
         type: 2}
@@ -577,7 +577,7 @@ Prefab:
     - target: {fileID: 114541252860978324, guid: 7706458cbe3b6cf4a8c0dbe23d233811,
         type: 2}
       propertyPath: expandMaxAnchor.y
-      value: 1
+      value: 0.17
       objectReference: {fileID: 0}
     - target: {fileID: 224234566978284720, guid: 7706458cbe3b6cf4a8c0dbe23d233811,
         type: 2}
